@@ -1,0 +1,136 @@
+Microsoft (R) Macro Assembler (x64) Version 14.44.35230.0   11/21/26 17:25:47
+lab_1.asm						     Page 1 - 1
+
+
+				; System Programming - 1, laboratory 1, variant 1.
+				; X = 8354, Y = 101, N = 1. Widths follow the handout: 8/16/32 bits.
+				; Only values representable in each signed/unsigned type are declared.
+				OPTION CASEMAP:NONE
+				EXTERN ExitProcess:PROC
+				
+ 00000000			.data
+				PUBLIC data_begin, data_end
+ 00000000			data_begin LABEL BYTE
+				
+				; Byte: unsigned 8-bit, 0..255. The four X values and negative Y values do not fit.
+				PUBLIC byte_y_plus_n, byte_y_minus_n
+ 00000000 66			byte_y_plus_n       DB 102
+ 00000001 64			byte_y_minus_n      DB 100
+				
+				; ShortInt: signed 8-bit, -128..127. The four X values do not fit.
+				PUBLIC shortint_y_plus_n, shortint_y_minus_n
+				PUBLIC shortint_neg_y_minus_n, shortint_neg_y_plus_n
+ 00000002 66			shortint_y_plus_n       DB 102
+ 00000003 64			shortint_y_minus_n      DB 100
+ 00000004 9A			shortint_neg_y_minus_n  DB -102
+ 00000005 9C			shortint_neg_y_plus_n   DB -100
+				
+				; Word: unsigned 16-bit, 0..65535. Negative values do not fit.
+				PUBLIC word_x_plus_n, word_x_minus_n, word_y_plus_n, word_y_minus_n
+ 00000006 20A3			word_x_plus_n       DW 8355
+ 00000008 20A1			word_x_minus_n      DW 8353
+ 0000000A 0066			word_y_plus_n       DW 102
+ 0000000C 0064			word_y_minus_n      DW 100
+				
+				; Integer: signed 16-bit, -32768..32767. All eight values fit.
+				PUBLIC integer_x_plus_n, integer_x_minus_n
+				PUBLIC integer_neg_x_minus_n, integer_neg_x_plus_n
+				PUBLIC integer_y_plus_n, integer_y_minus_n
+				PUBLIC integer_neg_y_minus_n, integer_neg_y_plus_n
+ 0000000E 20A3			integer_x_plus_n       DW 8355
+ 00000010 20A1			integer_x_minus_n      DW 8353
+ 00000012 DF5D			integer_neg_x_minus_n  DW -8355
+ 00000014 DF5F			integer_neg_x_plus_n   DW -8353
+ 00000016 0066			integer_y_plus_n       DW 102
+ 00000018 0064			integer_y_minus_n      DW 100
+ 0000001A FF9A			integer_neg_y_minus_n  DW -102
+ 0000001C FF9C			integer_neg_y_plus_n   DW -100
+				
+				; LongWord: unsigned 32-bit, 0..4294967295. Negative values do not fit.
+				PUBLIC longword_x_plus_n, longword_x_minus_n
+				PUBLIC longword_y_plus_n, longword_y_minus_n
+ 0000001E 000020A3		longword_x_plus_n   DD 8355
+ 00000022 000020A1		longword_x_minus_n  DD 8353
+ 00000026 00000066		longword_y_plus_n   DD 102
+ 0000002A 00000064		longword_y_minus_n  DD 100
+				
+				; LongInt: signed 32-bit, -2147483648..2147483647. All eight values fit.
+				PUBLIC longint_x_plus_n, longint_x_minus_n
+				PUBLIC longint_neg_x_minus_n, longint_neg_x_plus_n
+				PUBLIC longint_y_plus_n, longint_y_minus_n
+				PUBLIC longint_neg_y_minus_n, longint_neg_y_plus_n
+ 0000002E 000020A3		longint_x_plus_n       DD 8355
+ 00000032 000020A1		longint_x_minus_n      DD 8353
+ 00000036 FFFFDF5D		longint_neg_x_minus_n  DD -8355
+ 0000003A FFFFDF5F		longint_neg_x_plus_n   DD -8353
+ 0000003E 00000066		longint_y_plus_n       DD 102
+ 00000042 00000064		longint_y_minus_n      DD 100
+ 00000046 FFFFFF9A		longint_neg_y_minus_n  DD -102
+ 0000004A FFFFFF9C		longint_neg_y_plus_n   DD -100
+ 0000004E			data_end LABEL BYTE
+				
+ 00000000			.code
+				; Data declarations are the lab task. This entry point permits a smoke test.
+ 00000000			WinMain PROC FRAME
+ 00000000  48/ 83 EC 28		    sub rsp, 28h
+				    .allocstack 28h
+				    .endprolog
+ 00000004  33 C9		    xor ecx, ecx
+ 00000006  E8 00000000 E	    call ExitProcess
+ 0000000B  CC			    int 3
+ 0000000C			WinMain ENDP
+				END
+Microsoft (R) Macro Assembler (x64) Version 14.44.35230.0   11/21/26 17:25:47
+lab_1.asm						     Symbols 2 - 1
+
+
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+WinMain  . . . . . . . . . . . .	P 	 00000000 _TEXT	Length= 0000000C Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+$xdatasym  . . . . . . . . . . .	Byte	 00000000 _XDATA	
+ExitProcess  . . . . . . . . . .	L 	 00000000 External
+byte_y_minus_n . . . . . . . . .	Byte	 00000001 _DATA	Public
+byte_y_plus_n  . . . . . . . . .	Byte	 00000000 _DATA	Public
+data_begin . . . . . . . . . . .	Byte	 00000000 _DATA	Public
+data_end . . . . . . . . . . . .	Byte	 0000004E _DATA	Public
+integer_neg_x_minus_n  . . . . .	Word	 00000012 _DATA	Public
+integer_neg_x_plus_n . . . . . .	Word	 00000014 _DATA	Public
+integer_neg_y_minus_n  . . . . .	Word	 0000001A _DATA	Public
+integer_neg_y_plus_n . . . . . .	Word	 0000001C _DATA	Public
+integer_x_minus_n  . . . . . . .	Word	 00000010 _DATA	Public
+integer_x_plus_n . . . . . . . .	Word	 0000000E _DATA	Public
+integer_y_minus_n  . . . . . . .	Word	 00000018 _DATA	Public
+integer_y_plus_n . . . . . . . .	Word	 00000016 _DATA	Public
+longint_neg_x_minus_n  . . . . .	DWord	 00000036 _DATA	Public
+longint_neg_x_plus_n . . . . . .	DWord	 0000003A _DATA	Public
+longint_neg_y_minus_n  . . . . .	DWord	 00000046 _DATA	Public
+longint_neg_y_plus_n . . . . . .	DWord	 0000004A _DATA	Public
+longint_x_minus_n  . . . . . . .	DWord	 00000032 _DATA	Public
+longint_x_plus_n . . . . . . . .	DWord	 0000002E _DATA	Public
+longint_y_minus_n  . . . . . . .	DWord	 00000042 _DATA	Public
+longint_y_plus_n . . . . . . . .	DWord	 0000003E _DATA	Public
+longword_x_minus_n . . . . . . .	DWord	 00000022 _DATA	Public
+longword_x_plus_n  . . . . . . .	DWord	 0000001E _DATA	Public
+longword_y_minus_n . . . . . . .	DWord	 0000002A _DATA	Public
+longword_y_plus_n  . . . . . . .	DWord	 00000026 _DATA	Public
+shortint_neg_y_minus_n . . . . .	Byte	 00000004 _DATA	Public
+shortint_neg_y_plus_n  . . . . .	Byte	 00000005 _DATA	Public
+shortint_y_minus_n . . . . . . .	Byte	 00000003 _DATA	Public
+shortint_y_plus_n  . . . . . . .	Byte	 00000002 _DATA	Public
+word_x_minus_n . . . . . . . . .	Word	 00000008 _DATA	Public
+word_x_plus_n  . . . . . . . . .	Word	 00000006 _DATA	Public
+word_y_minus_n . . . . . . . . .	Word	 0000000C _DATA	Public
+word_y_plus_n  . . . . . . . . .	Word	 0000000A _DATA	Public
+
+	   0 Warnings
+	   0 Errors
