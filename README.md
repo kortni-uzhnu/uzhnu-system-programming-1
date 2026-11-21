@@ -46,11 +46,32 @@ and leaves the result buffer unchanged on failure.
 
 ## Reports and review
 
-Each lab has its own PDF report, source and assembler listing. The reports cover
-the required workings, implementation, verification and control questions.
+The first remote build passed on 21 November 2026:
+
+- Lab 1: 30 declarations and 78 assembled data bytes verified.
+- Lab 2: 29,174 arithmetic cases and 42 command-line cases passed.
+- [Successful Windows run](https://github.com/kortni-uzhnu/uzhnu-system-programming-1/actions/runs/44929971317)
+
+`reports/` contains the 13-page Lab 1 report, 16-page Lab 2 report and both
+unmodified assembler listings. The reports
+cover the required workings, implementation, verification and control questions,
+and reproduce the genuine ML64 listings. Local `Lab 1/` and `Lab 2/` folders each
+contain the three files prepared for review: the source, listing and PDF.
+
 `build/` contains the downloaded remote binaries, listings, logs and test records.
 The Moodle assignments accept up to five files of 5 MB each. Submission packages
-will be prepared for review; no Moodle submission is made by the build workflow.
+are prepared for review; no Moodle submission has been made.
+
+To recover the build files from GitHub's **Download log archive**:
+
+```text
+python recover_results.py path-to-downloaded-log-archive.zip
+```
+
+The recovery script checks the ZIP hash, every contained file hash and the local
+source hashes. `build_reports.py` regenerates the reports from this verified
+evidence using Python with ReportLab and the existing Windows fonts. The saved
+run metadata records the exact source commit, runner image and tool paths.
 
 References:
 - [Course](https://moodle.uzhnu.edu.ua/course/view.php?id=1870)
